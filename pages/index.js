@@ -1,20 +1,30 @@
-import Head from 'next/head';
-import { FaHeart } from 'react-icons/fa';
+import React from "react";
+import Head from "next/head";
+import Layout from "../components/layout";
+import { useTheme } from "../utils/themeContext";
 
-export default function Home() {
+export default function Index() {
+	const { toggleTheme } = useTheme();
+
 	return (
 		<>
 			<Head>
-				<title>Next Tailwind Data Card</title>
+				<title>API Data</title>
 			</Head>
-			<div>
-				<button
-					aria-label="like"
-					className="p-2 text-red-400 transition rounded-full hover:bg-red-400 hover:shadow-md hover:text-white"
-				>
-					<FaHeart />
-				</button>
-			</div>
+			<Layout>
+				<div className="absolute w-screen h-screen bg-background p-12 flex flex-col align-center">
+					<h1 className="text-center text-heading text-4xl font-bold">Title</h1>
+					<p className="text-center mt-8 text-xl text-body">Content</p>
+					<div className="text-center">
+						<button
+							className="m-8 p-4 border rounded-lg bg-primary hover:bg-primary-hover text-white transition duration-200"
+							onClick={toggleTheme}
+						>
+							Toggle theme
+						</button>
+					</div>
+				</div>
+			</Layout>
 		</>
 	);
 }
