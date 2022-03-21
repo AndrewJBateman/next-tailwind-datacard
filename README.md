@@ -1,6 +1,7 @@
 # :zap: Next Tailwind Datacard
 
-* A Next/Tailwind app to display API data with maximum Lighthouse score.
+* A Next/Tailwind app with working dark theme toggle
+* Barebones app with no content
 * **Note:** to open web links in a new window use: _ctrl+click on link_
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/AndrewJBateman/next-tailwind-datacard?style=plastic)
@@ -37,37 +38,55 @@
 
 * [React v17](https://reactjs.org/) Javascript library.
 * [React icons v4](https://www.npmjs.com/package/react-icons)
-* [Next v11](https://nextjs.org/) minimalist framework for rendering react apps on the server.
-* [Tailwind v2](https://tailwindcss.com/) utility-first CSS framework
+* [Next v12](https://nextjs.org/) minimalist framework for rendering react apps on the server.
+* [Tailwind v3](https://tailwindcss.com/) utility-first CSS framework
 * [PostCSS v8](https://postcss.org/) tool for transforming CSS with JavaScript
 * [Tailwind CSS Color Customiser](https://tailwindcss.com/docs/customizing-colors)
-* [SpaceX Open Source REST API v4](https://github.com/r-spacex/SpaceX-API) for SpaceX launch, rocket, core, capsule, starlink, launchpad, and landing pad data
 * [pngTree](https://pngtree.com/) downloadable images, png etc.
 * [pwa-asset-generator v4](https://www.npmjs.com/package/pwa-asset-generator) Automated PWA asset generation and image declaration. Creates icons and JSON array for PWA manifest.json file
 
 ## :floppy_disk: Setup
 
-* `npm run dev` runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* `npm run dev` runs the app in development mode
+* Open [http://localhost:3000](http://localhost:3000) to view app in the browser.
 * `npm run build` builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
 * `npm run start` to run the built app.
 
 ## :computer: Code Examples
 
-* tba
+* `utils/themeContext.js` function to toggle theme, default theme = light.
+* Use React UseContext to share global theme data
 
 ```javascript
+export default function ThemeProvider({ children }) {
+  const [theme, setTheme] = React.useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => {
+  return React.useContext(ThemeContext);
+};
 
 ```
 
 ## :clipboard: Status & To-Do List
 
-* Status: In work
+* Status: Working. No content. Theme toggle
 * To-Do: Modify theme colors, navbar, footer?, home page grid of cards with API data, detail page new card. Add PWA and SSR
 
 ## :clap: Inspiration
 
 * [Install Tailwind CSS with Next.js](https://tailwindcss.com/docs/guides/nextjs)
-* [Medium: How to use Next.js <Image> component](https://medium.com/eincode/how-to-use-next-js-image-component-dfbf3725b12)
+* [Medium: How to use Next.js Image component](https://medium.com/eincode/how-to-use-next-js-image-component-dfbf3725b12)
 * [Convert your website into a PWA in 8 simple steps](https://milindsoorya.site/blog/convert-your-website-into-a-pwa-in-8-simple-steps-next-js-pwa-series-part-2#step-6-edit-your-_documentjs-file)
 
 ## :file_folder: License
